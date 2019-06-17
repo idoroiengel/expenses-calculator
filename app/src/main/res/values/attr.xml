@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="main_layout_type">
+        <enum name="incomes" value="0"/>
+        <enum name="expenses" value="1"/>
+    </attr>
+    <declare-styleable name="MainLayout">
+        <attr name="main_layout_type"/>
+    </declare-styleable>
+</resources>

@@ -1,16 +1,45 @@
 package org.idoroiengel.expensescalculator.ui.component;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import org.idoroiengel.expensescalculator.R;
 
 
 public class MainLayout extends LinearLayout {
 
-    TextAndValueLayout mTitle;
+    public enum LayoutType{
+        INCOME(0, R.string.layout_type_incomes_title),
+        EXPENSE(1, R.string.layout_type_expenses_title);
+
+        private int mResource;
+        private int mType;
+
+        LayoutType(int type, int mResource) {
+            this.mType = type;
+            this.mResource = mResource;
+        }
+        public static LayoutType getByType(int type){
+            LayoutType result = null;
+            for (LayoutType layoutType : LayoutType.values()) {
+                if(layoutType.mType == type){
+                    result = layoutType;
+                }
+            }
+            return result;
+        }
+    }
+
+    private TextView mTitle;
+    private LayoutType mLayoutType;
+
+    public void setmLayoutType(LayoutType mLayoutType) {
+        this.mLayoutType = mLayoutType;
+    }
 
     public MainLayout(Context context) {
         this(context, null);
@@ -20,6 +49,7 @@ public class MainLayout extends LinearLayout {
         super(context, attrs);
 
         LayoutInflater.from(context).inflate(R.layout.main_layout, this, true);
+        determineListType(context, attrs);
 
         bindViews();
         initViews();
@@ -30,6 +60,17 @@ public class MainLayout extends LinearLayout {
     }
 
     private void initViews() {
+        tweakTitle();
+    }
 
+    private void determineListType(Context context, AttributeSet attrs) {
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MainLayout);
+        String listType = typedArray.getString(R.styleable.MainLayout_main_layout_type);
+        setmLayoutType(LayoutType.getByType(Integer.valueOf(listType)));
+        typedArray.recycle();
+    }
+
+    private void tweakTitle() {
+        mTitle.setText(getContext().getString(mLayoutType.mResource));
     }
 }
