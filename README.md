@@ -10,3 +10,8 @@ Things I want to add to the app:
 4. display according to months, and swiping through them.
 5. breakdown of incomes/expenses by date.
 6. averages and data manipulation by date breakdown.
+
+
+
+Color palette was taken from https://colorhunt.co/
+There's still work to do on that in terms of assigning colors in app according to UI/UX standards.
