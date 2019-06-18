@@ -3,4 +3,6 @@
     <string name="app_name">Expenses Calculator</string>
     <string name="layout_type_incomes_title">Incomes</string>
     <string name="layout_type_expenses_title">Expenses</string>
+    <string name="text_and_value_layout_key_hint">item</string>
+    <string name="text_and_value_layout_value_hint">value</string>
 </resources>

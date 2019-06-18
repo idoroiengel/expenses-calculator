@@ -8,4 +8,6 @@
     <color name="secondary_palette_color">#23eae6</color>
     <color name="tertiary_palette_color">#1b7fbd</color>
     <color name="quaternary_palette_color">#1b7fbd</color>
+    <color name="first_shade_of_grey">#dfdfdf</color>
+    <color name="white">#fffafa</color>
 </resources>

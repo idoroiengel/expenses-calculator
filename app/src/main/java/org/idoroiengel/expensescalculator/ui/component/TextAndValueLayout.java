@@ -3,6 +3,7 @@ package org.idoroiengel.expensescalculator.ui.component;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -12,6 +13,14 @@ public class TextAndValueLayout extends LinearLayout {
 
     private EditText mKeyText;
     private EditText mValueText;
+
+    public EditText getmKeyText() {
+        return mKeyText;
+    }
+
+    public EditText getmValueText() {
+        return mValueText;
+    }
 
     public TextAndValueLayout(Context context) {
         this(context, null);
@@ -33,5 +42,12 @@ public class TextAndValueLayout extends LinearLayout {
 
     private void initViews() {
 
+    }
+
+    public void setTitle(String string) {
+        mKeyText.setText(string);
+        if(mValueText.getText().toString().isEmpty()){
+            mValueText.setVisibility(View.GONE);
+        }
     }
 }

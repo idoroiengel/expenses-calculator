@@ -2,4 +2,6 @@
     <string name="app_name">Expenses Calculator</string>
     <string name="layout_type_incomes_title">הכנסות</string>
     <string name="layout_type_expenses_title">הוצאות</string>
+    <string name="text_and_value_layout_key_hint">הוצאה</string>
+    <string name="text_and_value_layout_value_hint">עלות</string>
 </resources>

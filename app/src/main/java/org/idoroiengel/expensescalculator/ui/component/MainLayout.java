@@ -2,12 +2,18 @@ package org.idoroiengel.expensescalculator.ui.component;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.idoroiengel.expensescalculator.R;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 public class MainLayout extends LinearLayout {
@@ -34,8 +40,15 @@ public class MainLayout extends LinearLayout {
         }
     }
 
+    // UI
     private TextView mTitle;
+    private AppCompatButton mAddItemButton;
+    private LinearLayout mRootView;
+
+    // data
     private LayoutType mLayoutType;
+    private Map<String, Integer> mValuesMap;
+    private List<TextAndValueLayout> mItemsList;
 
     public void setmLayoutType(LayoutType mLayoutType) {
         this.mLayoutType = mLayoutType;
@@ -57,10 +70,25 @@ public class MainLayout extends LinearLayout {
 
     private void bindViews() {
         mTitle = findViewById(R.id.main_layout_title);
+        mAddItemButton = findViewById(R.id.main_layout_add_item_button);
+        mRootView = findViewById(R.id.main_layout_root_view);
     }
 
     private void initViews() {
         tweakTitle();
+        mValuesMap = new HashMap<>();
+        initAddItemButton();
+        mItemsList = new ArrayList<>();
+
+    }
+
+    private void initAddItemButton() {
+        mAddItemButton.setOnClickListener(v -> {
+            TextAndValueLayout layout = new TextAndValueLayout(getContext());
+            mItemsList.add(layout);
+            addItem(layout);
+            mRootView.addView(layout, mRootView.getChildCount() - 1);
+        });
     }
 
     private void determineListType(Context context, AttributeSet attrs) {
@@ -72,5 +100,17 @@ public class MainLayout extends LinearLayout {
 
     private void tweakTitle() {
         mTitle.setText(getContext().getString(mLayoutType.mResource));
+    }
+
+    public void addItem(TextAndValueLayout textAndValueLayout){
+        int value;
+        String key = null;
+        try {
+            key = textAndValueLayout.getmKeyText().getText().toString();
+            value = Integer.parseInt(textAndValueLayout.getmValueText().getText().toString());
+        }catch (NumberFormatException e){
+            value = 0;
+        }
+        mValuesMap.put(key, value);
     }
 }
