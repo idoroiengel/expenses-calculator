@@ -4,19 +4,17 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.idoroiengel.expensescalculator.R;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 
 public class MainLayout extends LinearLayout {
+
+    public static final String LOG_TAG = "DEBUG";
 
     public enum LayoutType{
         INCOME(0, R.string.layout_type_incomes_title),
@@ -42,16 +40,20 @@ public class MainLayout extends LinearLayout {
 
     // UI
     private TextView mTitle;
-    private AppCompatButton mAddItemButton;
-    private LinearLayout mRootView;
+    private AppCompatButton mAddLayoutButton;
+    private LinearLayout mTextAndValueLayoutRootView;
 
     // data
     private LayoutType mLayoutType;
-    private Map<String, Integer> mValuesMap;
-    private List<TextAndValueLayout> mItemsList;
+    private int mSummation;
+    private SparseArray<String> mValuesMap;
 
     public void setmLayoutType(LayoutType mLayoutType) {
         this.mLayoutType = mLayoutType;
+    }
+
+    public int getmSummation() {
+        return mSummation;
     }
 
     public MainLayout(Context context) {
@@ -70,25 +72,32 @@ public class MainLayout extends LinearLayout {
 
     private void bindViews() {
         mTitle = findViewById(R.id.main_layout_title);
-        mAddItemButton = findViewById(R.id.main_layout_add_item_button);
-        mRootView = findViewById(R.id.main_layout_root_view);
+        mAddLayoutButton = findViewById(R.id.main_layout_add_item_button);
+        mTextAndValueLayoutRootView = findViewById(R.id.main_layout_text_and_value_layout_layout);
     }
 
     private void initViews() {
         tweakTitle();
-        mValuesMap = new HashMap<>();
-        initAddItemButton();
-        mItemsList = new ArrayList<>();
-
+        initButton();
+        mValuesMap = new SparseArray<>();
     }
 
-    private void initAddItemButton() {
-        mAddItemButton.setOnClickListener(v -> {
-            TextAndValueLayout layout = new TextAndValueLayout(getContext());
-            mItemsList.add(layout);
-            addItem(layout);
-            mRootView.addView(layout, mRootView.getChildCount() - 1);
+    private void initButton() {
+        mAddLayoutButton.setOnClickListener(v -> {
+            addTextAndValueLayout();
+
+            popFocusForNewLayout();
+
+
         });
+    }
+
+    private void popFocusForNewLayout() {
+        mTextAndValueLayoutRootView.getChildAt(mTextAndValueLayoutRootView.getChildCount() - 1).requestFocus();
+    }
+
+    private void addTextAndValueLayout() {
+        mTextAndValueLayoutRootView.addView(new TextAndValueLayout(getContext()), mTextAndValueLayoutRootView.getChildCount());
     }
 
     private void determineListType(Context context, AttributeSet attrs) {
@@ -102,15 +111,5 @@ public class MainLayout extends LinearLayout {
         mTitle.setText(getContext().getString(mLayoutType.mResource));
     }
 
-    public void addItem(TextAndValueLayout textAndValueLayout){
-        int value;
-        String key = null;
-        try {
-            key = textAndValueLayout.getmKeyText().getText().toString();
-            value = Integer.parseInt(textAndValueLayout.getmValueText().getText().toString());
-        }catch (NumberFormatException e){
-            value = 0;
-        }
-        mValuesMap.put(key, value);
-    }
+
 }

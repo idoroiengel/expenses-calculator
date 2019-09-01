@@ -19,12 +19,22 @@
        android:layout_marginTop="20dp"
        />
 
+   <LinearLayout
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/main_layout_text_and_value_layout_layout"
+       >
+
    <org.idoroiengel.expensescalculator.ui.component.TextAndValueLayout
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
+       android:id="@+id/main_layout_initial_text_and_value_layout"
        >
 
    </org.idoroiengel.expensescalculator.ui.component.TextAndValueLayout>
+
+   </LinearLayout>
 
    <android.support.v7.widget.AppCompatButton
        android:layout_width="50dp"

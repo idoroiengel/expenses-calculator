@@ -19,6 +19,7 @@
         android:layout_weight="1"
         android:hint="@string/text_and_value_layout_key_hint"
         android:background="@null"
+        android:autofillHints="@string/text_and_value_layout_key_hint"
         />
 
     <EditText
@@ -30,6 +31,7 @@
         android:layout_weight="1"
         android:hint="@string/text_and_value_layout_value_hint"
         android:background="@null"
+        android:autofillHints="@string/text_and_value_layout_value_hint"
         />
 
 </LinearLayout>
