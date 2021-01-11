@@ -1,18 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    android:gravity="center">
+<ScrollView
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:baselineAligned="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <org.idoroiengel.expensescalculator.ui.component.MainLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:id="@+id/activity_main_incomes_layout"
+        android:layout_weight="1"
+        custom:main_layout_type="incomes"
+
+        >
+    </org.idoroiengel.expensescalculator.ui.component.MainLayout>
+
+    <org.idoroiengel.expensescalculator.ui.component.MainLayout
+        android:id="@+id/activity_main_expenses_layout"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        custom:main_layout_type="expenses">
+
+    </org.idoroiengel.expensescalculator.ui.component.MainLayout>
+    </LinearLayout>
+</ScrollView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:elevation="2dp"
+        android:background="@drawable/top_shadow_effect"
+        />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:minHeight="70dp"
+        android:id="@+id/activity_main_static_layout"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:id="@+id/activity_main_sum_text_view"
+            android:padding="4dp"
+            />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
